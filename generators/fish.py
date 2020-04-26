@@ -35,6 +35,7 @@ class FishGenerator:
         self.generators = [Common(), *generators]
 
     def generate_files(self):
+        ls = self.generate_alises()
         vs = self.generate_variables()
         fs = self.generate_functions()
         config = 'umask 077\n\n'
@@ -51,7 +52,7 @@ class FishGenerator:
         print('Generating ~/.config/fish/config.fish')
         with open(config_file_name, 'tw') as config_file:
             config_file.write(config)
-        for name, body in fs:
+        for name, body in (fs + ls):
             fname = path.expanduser(f'~/.config/fish/functions/{name}.fish')
             if path.exists(fname):
                 shutil.move(fname, f'{fname}.old')
@@ -73,6 +74,12 @@ class FishGenerator:
                 for e in sorted(fs, key=lambda x: x.name)
                 if e.only is None or 'fish' in e.only]
 
+    def generate_alises(self):
+        fs = [g.generate_alises() for g in self.generators]
+        fs = list(itertools.chain.from_iterable(fs))
+        return [(e.name, self.alias_to_string(e))
+                for e in sorted(fs, key=lambda x: x.name)]
+
     def func_to_string(self, func):
         args = [a.replace('$', '') for a in func.args]
         args = [f'set {arg} $argv[{i+1}]' for i, arg in enumerate(args)]
@@ -84,6 +91,12 @@ class FishGenerator:
 
     def var_to_string(self, var):
         return f'set -x {var.name} {var.value.replace("$(", "(")}'
+
+    def alias_to_string(self, alias):
+        f = f"function {alias.name}\n\t"
+        f += f'{alias.value} $argv'
+        f += '\nend'
+        return f
 
     def generate_update_function(self, fs):
         fs = [f.name for f in fs if f.name.startswith('update-')]

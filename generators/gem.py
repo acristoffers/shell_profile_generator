@@ -36,3 +36,6 @@ class GEM:
 
     def generate_variables(self):
         return []
+
+    def generate_alises(self):
+        return []

@@ -52,3 +52,8 @@ class Linux:
         return [
             Variable('DISPLAY', f'"{os.environ["DISPLAY"]}"'),
         ]
+
+    def generate_alises(self):
+        return [
+            Alias('ls', 'ls --color=auto')
+        ]

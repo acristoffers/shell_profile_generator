@@ -28,28 +28,7 @@ from .utils import Function, Variable
 
 class macOS:
     def generate_functions(self):
-        gs = [
-            Function(
-                'rep',
-                [],
-                r"resize -s 24 80 &>/dev/null;printf '\e[3;0;0t';clear"),
-            Function(
-                'rep2',
-                [],
-                r"resize -s 24 155 &>/dev/null;printf '\e[3;500;0t';clear"),
-            Function(
-                'rep3',
-                [],
-                r"resize -s 34 80 &>/dev/null;printf '\e[3;0;370t';clear"),
-            Function(
-                'rep4',
-                [],
-                r"resize -s 34 155 &>/dev/null;printf '\e[3;500;370t';clear"),
-            Function(
-                'fv',
-                [],
-                r"resize -s 60 155 &>/dev/null;printf '\e[3;500;0t';clear")
-        ]
+        gs = []
         if shutil.which('pip2'):
             gs += [
                 Function(
@@ -71,4 +50,27 @@ class macOS:
     def generate_variables(self):
         return [
             Variable('DISPLAY', '""'),
+        ]
+
+    def generate_alises(self):
+        return [
+            Alias(
+                'ls',
+                'ls -G'
+            ),
+            Alias(
+                'rep',
+                r"resize -s 24 80 &>/dev/null;printf '\e[3;0;0t';clear"),
+            Alias(
+                'rep2',
+                r"resize -s 24 155 &>/dev/null;printf '\e[3;500;0t';clear"),
+            Alias(
+                'rep3',
+                r"resize -s 34 80 &>/dev/null;printf '\e[3;0;370t';clear"),
+            Alias(
+                'rep4',
+                r"resize -s 34 155 &>/dev/null;printf '\e[3;500;370t';clear"),
+            Alias(
+                'fv',
+                r"resize -s 60 155 &>/dev/null;printf '\e[3;500;0t';clear")
         ]

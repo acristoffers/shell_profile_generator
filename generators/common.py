@@ -21,7 +21,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from .utils import Function, Variable
+from .utils import *
 import locale
 
 
@@ -67,10 +67,7 @@ class Common:
             Function('add_to_path_if_exists',
                      ['f'],
                      'if test -d $f\n\tset -x PATH $PATH $f\nend',
-                     ['fish']),
-            Function('ccat',
-                     ['f'],
-                     'pygmentize -g $f')
+                     ['fish'])
         ]
 
     def generate_variables(self):
@@ -80,4 +77,9 @@ class Common:
             Variable('LANG', '$LC_ALL'),
             Variable('EDITOR', 'code'),
             Variable('PYTHON', '$(which python3)')
+        ]
+
+    def generate_alises(self):
+        return [
+            Alias('ccat', 'pygmentize -g')
         ]

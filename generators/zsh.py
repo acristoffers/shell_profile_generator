@@ -34,14 +34,16 @@ class ZSHGenerator:
         self.generators = [Common(), *generators]
 
     def generate_files(self):
+        ls = self.generate_alises()
         vs = self.generate_variables()
         fs = self.generate_functions()
         profile = 'umask 077\n\n'
         profile += 'if [ -f /etc/bash_completion ];\nthen\n\tsource /etc/bash_completion\nfi\n\n'
         profile += 'if [[ $- == *i* ]];\nthen\n\texport PS1="%F{cyan}%1~ %F{green}$ %f"\n'
         profile += '''\tbindkey "^[[A" history-beginning-search-backward\n\tbindkey "^[[B" history-beginning-search-forward\nfi\n\n'''
-        profile += '\n\n'.join(fs) + '\n\n'
-        profile += '\n'.join(vs) + '\n'
+        profile += '\n'.join(ls) + ('\n\n' if len(ls) else '')
+        profile += '\n\n'.join(fs) + ('\n\n' if len(fs) else '')
+        profile += '\n'.join(vs) + ('\n\n' if len(vs) else '')
         profile += '\nssh-add -A &> /dev/null\n\n'
         profile += 'add_to_path_if_exists /usr/local/sbin\n'
         profile += 'add_to_path_if_exists $HOME/bin\n'
@@ -67,6 +69,11 @@ class ZSHGenerator:
                 for e in sorted(fs, key=lambda x: x.name)
                 if e.only is None or 'zsh' in e.only]
 
+    def generate_alises(self):
+        return [self.alias_to_string(e)
+                for g in self.generators
+                for e in g.generate_alises()]
+
     def func_to_string(self, func):
         args = [a.replace('$', '') for a in func.args]
         args = [f'{arg}=${i+1}' for i, arg in enumerate(args)]
@@ -78,6 +85,9 @@ class ZSHGenerator:
 
     def var_to_string(self, var):
         return f'export {var.name}={var.value}'
+
+    def alias_to_string(self, alias):
+        return f'alias {alias.name}="{alias.value}"'
 
     def generate_update_function(self, fs):
         fs = [f.name for f in fs if f.name.startswith('update-')]
