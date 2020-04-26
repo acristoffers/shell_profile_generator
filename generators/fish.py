@@ -48,12 +48,14 @@ class FishGenerator:
         config_file_name = path.expanduser('~/.config/fish/config.fish')
         if path.exists(config_file_name):
             shutil.move(config_file_name, f'{config_file_name}.old')
+        print('Generating ~/.config/fish/config.fish')
         with open(config_file_name, 'tw') as config_file:
             config_file.write(config)
         for name, body in fs:
             fname = path.expanduser(f'~/.config/fish/functions/{name}.fish')
             if path.exists(fname):
                 shutil.move(fname, f'{fname}.old')
+            print(f'Generating ~/.config/fish/functions/{name}.fish')
             with open(fname, 'tw') as func_file:
                 func_file.write(body)
 
