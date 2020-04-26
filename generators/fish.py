@@ -115,7 +115,7 @@ class FishGenerator:
                 'set_color cyan\n'
                 'echo -n (basename (prompt_pwd))\n'
                 'set_color green\n'
-                'echo -n " $ "\n'
+                "echo -n ' $ '\n"
                 'set_color normal'
             )
         )
