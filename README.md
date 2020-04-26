@@ -37,6 +37,7 @@ Executes
 Define Functions
 ----------------
 
+- ls # ls but colored
 - add_to_path_if_exists # prepend to PATH if folder - exists
 - ccat # coloured cat, requires pygmentize
 - tbz, tgz, txz # tar and compress a given folder, - best compression
