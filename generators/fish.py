@@ -109,7 +109,7 @@ class FishGenerator:
 
     def generate_fish_print(self):
         return Function(
-            'fish_print',
+            'fish_prompt',
             [],
             (
                 'set_color cyan\n'
