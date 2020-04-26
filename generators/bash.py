@@ -50,8 +50,6 @@ class BashGenerator:
         profile += 'add_to_path_if_exists $HOME/.config/yarn/global/node_modules/.bin\n'
         profile += 'add_to_path_if_exists $HOME/.cargo/bin\n'
         print(f'Generating ~/.profile and ~/.bashrc')
-        print(profile)
-        return
         profile_file_name = path.expanduser('~/.profile')
         if path.exists(profile_file_name):
             shutil.move(profile_file_name, f'{profile_file_name}.old')
