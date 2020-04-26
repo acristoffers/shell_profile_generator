@@ -78,7 +78,6 @@ class Common:
             Variable('HOME', '~'),
             Variable('LC_ALL', '.'.join(locale.getdefaultlocale())),
             Variable('LANG', '$LC_ALL'),
-            Variable('DISPLAY', '""'),
             Variable('EDITOR', 'code'),
             Variable('PYTHON', '$(which python3)')
         ]

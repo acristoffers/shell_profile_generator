@@ -69,4 +69,6 @@ class macOS:
         return gs
 
     def generate_variables(self):
-        return []
+        return [
+            Variable('DISPLAY', '""'),
+        ]
