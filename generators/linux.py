@@ -24,7 +24,7 @@
 import os
 import shutil
 
-from .utils import Function, Variable
+from .utils import *
 
 
 class Linux:
