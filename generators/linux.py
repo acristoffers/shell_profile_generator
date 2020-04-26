@@ -55,5 +55,5 @@ class Linux:
 
     def generate_alises(self):
         return [
-            Alias('ls', 'ls --color=auto')
+            Alias('ls', 'ls --color=auto', ['bash', 'zsh'])
         ]

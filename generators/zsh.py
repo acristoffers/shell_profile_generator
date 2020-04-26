@@ -38,7 +38,6 @@ class ZSHGenerator:
         vs = self.generate_variables()
         fs = self.generate_functions()
         profile = 'umask 077\n\n'
-        profile += 'if [ -f /etc/bash_completion ];\nthen\n\tsource /etc/bash_completion\nfi\n\n'
         profile += 'if [[ $- == *i* ]];\nthen\n\texport PS1="%F{cyan}%1~ %F{green}$ %f"\n'
         profile += '''\tbindkey "^[[A" history-beginning-search-backward\n\tbindkey "^[[B" history-beginning-search-forward\nfi\n\n'''
         profile += '\n'.join(ls) + ('\n\n' if len(ls) else '')
@@ -72,7 +71,8 @@ class ZSHGenerator:
     def generate_alises(self):
         return [self.alias_to_string(e)
                 for g in self.generators
-                for e in g.generate_alises()]
+                for e in g.generate_alises()
+                if e.only is None or 'zsh' in e.only]
 
     def func_to_string(self, func):
         args = [a.replace('$', '') for a in func.args]

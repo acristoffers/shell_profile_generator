@@ -36,5 +36,8 @@ class Variable:
         self.value = value
 
 
-class Alias(Variable):
-    pass
+class Alias:
+    def __init__(self, name, value, only=None):
+        self.name = name
+        self.value = value
+        self.only = only

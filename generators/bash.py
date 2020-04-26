@@ -77,7 +77,8 @@ class BashGenerator:
     def generate_alises(self):
         return [self.alias_to_string(e)
                 for g in self.generators
-                for e in g.generate_alises()]
+                for e in g.generate_alises()
+                if e.only is None or 'bash' in e.only]
 
     def func_to_string(self, func):
         args = [a.replace('$', '') for a in func.args]

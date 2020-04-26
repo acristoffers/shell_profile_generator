@@ -78,7 +78,8 @@ class FishGenerator:
         fs = [g.generate_alises() for g in self.generators]
         fs = list(itertools.chain.from_iterable(fs))
         return [(e.name, self.alias_to_string(e))
-                for e in sorted(fs, key=lambda x: x.name)]
+                for e in sorted(fs, key=lambda x: x.name)
+                if e.only is None or 'fish' in e.only]
 
     def func_to_string(self, func):
         args = [a.replace('$', '') for a in func.args]

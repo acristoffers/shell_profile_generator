@@ -56,7 +56,8 @@ class macOS:
         return [
             Alias(
                 'ls',
-                'ls -G'
+                'ls -G',
+                ['bash', 'zsh']
             ),
             Alias(
                 'rep',
