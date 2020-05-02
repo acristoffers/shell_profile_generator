@@ -63,7 +63,7 @@ class Common:
             Function('add_to_path_if_exists',
                      ['f'],
                      (
-                         'has=$(python3 -c \'import os,sys; print(sys.argv[1] in os.environ["PATH"].split(":"))\')\n'
+                         'has=$(python3 -c \'import os,sys; print(sys.argv[1] in os.environ["PATH"].split(":"))\' $f)\n'
                          'if [[ -d "$f" ]] && $has = False\n'
                          'then\n'
                          '\texport PATH=$f:$PATH\n'
