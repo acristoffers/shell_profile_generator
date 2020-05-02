@@ -101,8 +101,7 @@ class Common:
             Function('fix_path',
                      [],
                      ('set tmp $PATH\n'
-                      'set -e PATH\n'
-                      'set -x PATH\n'
+                      'set -x PATH /bin\n'
                       'for path in {,/usr}{,/local}{/sbin,/bin}\n'
                       '\tadd_to_path_if_exists $path\n'
                       'end\n'
