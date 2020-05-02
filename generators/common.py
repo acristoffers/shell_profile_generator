@@ -64,7 +64,7 @@ class Common:
                      ['f'],
                      (
                          'has=$(python3 -c \'import os,sys; print(sys.argv[1] in os.environ["PATH"].split(":"))\' $f)\n'
-                         'if [[ -d "$f" ]] && [ "$has" == "False" ]\n'
+                         'if [[ -d "$f" ]] && [ "$has" = "False" ]\n'
                          'then\n'
                          '\texport PATH=$f:$PATH\n'
                          'fi'
