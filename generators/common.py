@@ -64,7 +64,7 @@ class Common:
                      ['f'],
                      (
                          'has=$(python3 -c \'import os,sys; print(sys.argv[1] in os.environ["PATH"].split(":"))\')\n'
-                         'if [[ -d "$f" ]] && has = False\n'
+                         'if [[ -d "$f" ]] && $has = False\n'
                          'then\n'
                          '\texport PATH=$f:$PATH\n'
                          'fi'
@@ -77,7 +77,7 @@ class Common:
             Function('fix_path',
                      [],
                      ('tmp=$PATH\n'
-                      'export PATH=""\n'
+                      'export PATH=$(dirname $(which python3))\n'
                       'ps=(/sbin /usr/sbin /usr/local/sbin /bin /usr/bin /usr/local/bin)\n'
                       'for path in "${ps[@]}"\n'
                       'do\n'
@@ -95,7 +95,7 @@ class Common:
             Function('fix_path',
                      [],
                      ('tmp=$PATH\n'
-                      'export PATH=""\n'
+                      'export PATH=$(dirname $(which python3))\n'
                       'ps=(/sbin /usr/sbin /usr/local/sbin /bin /usr/bin /usr/local/bin)\n'
                       'for p in "${ps[@]}"\ndo\n'
                       '\tadd_to_path_if_exists $p\n'
