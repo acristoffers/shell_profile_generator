@@ -62,7 +62,13 @@ class Common:
                      ['fish']),
             Function('add_to_path_if_exists',
                      ['f'],
-                     'if [[ -d "$f" ]]\nthen\n\texport PATH=$f:$PATH\nfi',
+                     (
+                         'has=$(python3 -c \'import os,sys; print(sys.argv[1] in os.environ["PATH"].split(":"))\')\n'
+                         'if [[ -d "$f" ]] && has = False\n'
+                         'then\n'
+                         '\texport PATH=$f:$PATH\n'
+                         'fi'
+                     ),
                      ['bash', 'zsh']),
             Function('add_to_path_if_exists',
                      ['f'],
