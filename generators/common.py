@@ -66,7 +66,49 @@ class Common:
                      ['bash', 'zsh']),
             Function('add_to_path_if_exists',
                      ['f'],
-                     'if test -d $f\n\tset -x PATH $PATH $f\nend',
+                     'if test -d $f; and not contains $f $PATH\n\tset -x PATH $f $PATH\nend',
+                     ['fish']),
+            Function('fix_path',
+                     [],
+                     ('tmp=$PATH\n'
+                      'export PATH=""\n'
+                      'ps=(/sbin /usr/sbin /usr/local/sbin /bin /usr/bin /usr/local/bin)\n'
+                      'for path in "${ps[@]}"\n'
+                      'do\n'
+                      '\tadd_to_path_if_exists $path\n'
+                      'done\n'
+                      'oldIFS=$IFS\n'
+                      'IFS=:\n'
+                      'ps=($tmp)\n'
+                      'IFS=$olsIFS\n'
+                      'for path in "${ps[@]}"\n'
+                      'do\n'
+                      '\tadd_to_path_if_exists $path\n'
+                      'done'),
+                     ['bash']),
+            Function('fix_path',
+                     [],
+                     ('tmp=$PATH\n'
+                      'export PATH=""\n'
+                      'ps=(/sbin /usr/sbin /usr/local/sbin /bin /usr/bin /usr/local/bin)\n'
+                      'for p in "${ps[@]}"\ndo\n'
+                      '\tadd_to_path_if_exists $p\n'
+                      'done\n'
+                      'for p in ${(s.:.)tmp}\ndo\n'
+                      '\tadd_to_path_if_exists $p\n'
+                      'done'),
+                     ['zsh']),
+            Function('fix_path',
+                     [],
+                     ('set tmp $PATH\n'
+                      'set -e PATH\n'
+                      'set -x PATH\n'
+                      'for path in {,/usr}{,/local}{/sbin,/bin}\n'
+                      '\tadd_to_path_if_exists $path\n'
+                      'end\n'
+                      'for path in $tmp\n'
+                      '\tadd_to_path_if_exists $path\n'
+                      'end'),
                      ['fish'])
         ]
 

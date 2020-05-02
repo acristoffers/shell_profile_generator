@@ -44,8 +44,9 @@ class ZSHGenerator:
         profile += '\n\n'.join(fs) + ('\n\n' if len(fs) else '')
         profile += '\n'.join(vs) + ('\n\n' if len(vs) else '')
         profile += '\nssh-add -A &> /dev/null\n\n'
-        profile += 'add_to_path_if_exists /usr/local/sbin\n'
+        profile += 'fix_path\n'
         profile += 'add_to_path_if_exists $HOME/bin\n'
+        profile += 'add_to_path_if_exists $HOME/.local/bin\n'
         profile += 'add_to_path_if_exists $HOME/.config/yarn/global/node_modules/.bin\n'
         profile += 'add_to_path_if_exists $HOME/.cargo/bin\n'
         print(f'Generating ~/.zshrc')
