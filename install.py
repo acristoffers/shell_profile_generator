@@ -39,16 +39,22 @@ def list_generators():
     gs = []
     if os == 'Darwin':
         gs += [macOS()]
+        cmds = {
+            'port': MacPort
+        }
+        gs += [v() for k, v in cmds.items() if shutil.which(k)]
     else:
         gs += [Linux()]
+        cmds = {
+            'apt-get': APT,
+            'zypper': Zypper,
+            'dnf': DNF,
+            'pacman': Pacman,
+            'aur': AUR
+        }
+        gs += [v() for k, v in cmds.items() if shutil.which(k)]
     cmds = {
         'brew': Brew,
-        'port': MacPort,
-        'apt-get': APT,
-        'zypper': Zypper,
-        'dnf': DNF,
-        'pacman': Pacman,
-        'aur': AUR,
         'gem': GEM,
         'npm': NPM,
         'yarn': Yarn,
