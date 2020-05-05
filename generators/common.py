@@ -118,9 +118,10 @@ class Common:
         ]
 
     def generate_variables(self):
+        cod, enc = locale.getdefaultlocale()
         return [
             Variable('HOME', '~'),
-            Variable('LC_ALL', '.'.join(locale.getdefaultlocale())),
+            Variable('LC_ALL', '.'.join((cod or 'en_US', enc or 'UTF8'))),
             Variable('LANG', '$LC_ALL'),
             Variable('EDITOR', 'code'),
             Variable('PYTHON', '$(which python3)')
