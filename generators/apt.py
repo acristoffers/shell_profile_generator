@@ -31,7 +31,7 @@ class APT:
                 'update-apt',
                 [],
                 (
-                    'sudo apt update\n'
+                    'sudo apt-get update\n'
                     'sudo apt-get dist-upgrade -y\n'
                     'sudo apt-get autoremove -y'
                 )
