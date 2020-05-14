@@ -45,11 +45,11 @@ class BashGenerator:
         profile += '\n\n'.join(fs) + ('\n\n' if len(fs) else '')
         profile += '\n'.join(vs) + ('\n\n' if len(vs) else '')
         profile += '\nssh-add -A &> /dev/null\n\n'
-        profile += 'fix_path\n'
-        profile += 'add_to_path_if_exists $HOME/bin\n'
-        profile += 'add_to_path_if_exists $HOME/.local/bin\n'
-        profile += 'add_to_path_if_exists $HOME/.config/yarn/global/node_modules/.bin\n'
-        profile += 'add_to_path_if_exists $HOME/.cargo/bin\n'
+        profile += 'fix-path\n'
+        profile += 'add-to-path-if-exists $HOME/bin\n'
+        profile += 'add-to-path-if-exists $HOME/.local/bin\n'
+        profile += 'add-to-path-if-exists $HOME/.config/yarn/global/node_modules/.bin\n'
+        profile += 'add-to-path-if-exists $HOME/.cargo/bin\n'
         print(f'Generating ~/.profile and ~/.bashrc')
         profile_file_name = path.expanduser('~/.profile')
         if path.exists(profile_file_name):

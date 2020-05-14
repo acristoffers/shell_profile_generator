@@ -41,11 +41,11 @@ class FishGenerator:
         config = 'umask 077\n\n'
         config += '\n'.join(vs)
         config += '\n\nssh-add -A ^/dev/null\n\n'
-        config += 'fix_path\n'
-        config += 'add_to_path_if_exists $HOME/bin\n'
-        config += 'add_to_path_if_exists $HOME/.local/bin\n'
-        config += 'add_to_path_if_exists $HOME/.config/yarn/global/node_modules/.bin\n'
-        config += 'add_to_path_if_exists $HOME/.cargo/bin\n'
+        config += 'fix-path\n'
+        config += 'add-to-path-if-exists $HOME/bin\n'
+        config += 'add-to-path-if-exists $HOME/.local/bin\n'
+        config += 'add-to-path-if-exists $HOME/.config/yarn/global/node_modules/.bin\n'
+        config += 'add-to-path-if-exists $HOME/.cargo/bin\n'
         os.makedirs(path.expanduser('~/.config/fish/functions'), exist_ok=True)
         config_file_name = path.expanduser('~/.config/fish/config.fish')
         if path.exists(config_file_name):

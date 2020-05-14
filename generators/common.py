@@ -60,7 +60,7 @@ class Common:
                      ['$f'],
                      'zip -9 -r (basename $argv[1]) (basename $argv[1])',
                      ['fish']),
-            Function('add_to_path_if_exists',
+            Function('add-to-path-if-exists',
                      ['f'],
                      (
                          'has=$(python3 -c \'import os,sys; print(sys.argv[1] in os.environ["PATH"].split(":"))\' $f)\n'
@@ -70,18 +70,18 @@ class Common:
                          'fi'
                      ),
                      ['bash', 'zsh']),
-            Function('add_to_path_if_exists',
+            Function('add-to-path-if-exists',
                      ['f'],
                      'if test -d $f; and not contains $f $PATH\n\tset -x PATH $f $PATH\nend',
                      ['fish']),
-            Function('fix_path',
+            Function('fix-path',
                      [],
                      ('tmp=$PATH\n'
                       'export PATH=$(dirname $(which python3))\n'
                       'ps=(/sbin /usr/sbin /usr/local/sbin /bin /usr/bin /usr/local/bin)\n'
                       'for path in "${ps[@]}"\n'
                       'do\n'
-                      '\tadd_to_path_if_exists $path\n'
+                      '\tadd-to-path-if-exists $path\n'
                       'done\n'
                       'oldIFS=$IFS\n'
                       'IFS=:\n'
@@ -89,30 +89,30 @@ class Common:
                       'IFS=$olsIFS\n'
                       'for path in "${ps[@]}"\n'
                       'do\n'
-                      '\tadd_to_path_if_exists $path\n'
+                      '\tadd-to-path-if-exists $path\n'
                       'done'),
                      ['bash']),
-            Function('fix_path',
+            Function('fix-path',
                      [],
                      ('tmp=$PATH\n'
                       'export PATH=$(dirname $(which python3))\n'
                       'ps=(/sbin /usr/sbin /usr/local/sbin /bin /usr/bin /usr/local/bin)\n'
                       'for p in "${ps[@]}"\ndo\n'
-                      '\tadd_to_path_if_exists $p\n'
+                      '\tadd-to-path-if-exists $p\n'
                       'done\n'
                       'for p in ${(s.:.)tmp}\ndo\n'
-                      '\tadd_to_path_if_exists $p\n'
+                      '\tadd-to-path-if-exists $p\n'
                       'done'),
                      ['zsh']),
-            Function('fix_path',
+            Function('fix-path',
                      [],
                      ('set tmp $PATH\n'
                       'set -x PATH /bin\n'
                       'for path in {,/usr}{,/local}{/sbin,/bin}\n'
-                      '\tadd_to_path_if_exists $path\n'
+                      '\tadd-to-path-if-exists $path\n'
                       'end\n'
                       'for path in $tmp\n'
-                      '\tadd_to_path_if_exists $path\n'
+                      '\tadd-to-path-if-exists $path\n'
                       'end'),
                      ['fish'])
         ]
