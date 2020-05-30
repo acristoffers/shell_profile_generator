@@ -123,7 +123,7 @@ class Common:
             Variable('HOME', '~'),
             Variable('LC_ALL', '.'.join((cod or 'en_US', enc or 'UTF8'))),
             Variable('LANG', '$LC_ALL'),
-            Variable('EDITOR', 'code'),
+            Variable('EDITOR', 'nvim'),
             Variable('PYTHON', '$(which python3)')
         ]
 
