@@ -21,38 +21,51 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
+"""
+Installs profiles
+"""
+
 import platform
 import shutil
 import sys
 
-from generators import *
+from generators import (APT, AUR, DNF, GEM, NPM, PKG, TLMGR, BashGenerator,
+                        Brew, FishGenerator, Linux, MacPort, Pacman, RustUp,
+                        Yarn, ZSHGenerator, Zypper, macOS)
 
 
 def print_help():
+    """
+    Prints usage instructions
+    """
     print('Generates profiles to bash, zsh and fish')
     print('Usage: ')
     print(f'\t{sys.argv[0]} [fish] [bash] [zsh]')
 
 
 def list_generators():
-    os = platform.system()
-    gs = []
-    if os == 'Darwin':
-        gs += [macOS()]
+    """
+    List the generators needed by this system
+    """
+    system = platform.system()
+    generators = []
+    if system == 'Darwin':
+        generators += [macOS()]
         cmds = {
             'port': MacPort
         }
-        gs += [v() for k, v in cmds.items() if shutil.which(k)]
+        generators += [v() for k, v in cmds.items() if shutil.which(k)]
     else:
-        gs += [Linux()]
+        generators += [Linux()]
         cmds = {
             'apt-get': APT,
             'zypper': Zypper,
             'dnf': DNF,
             'pacman': Pacman,
-            'aur': AUR
+            'aur': AUR,
+            'pkg': PKG
         }
-        gs += [v() for k, v in cmds.items() if shutil.which(k)]
+        generators += [v() for k, v in cmds.items() if shutil.which(k)]
     cmds = {
         'brew': Brew,
         'gem': GEM,
@@ -61,8 +74,8 @@ def list_generators():
         'rustup': RustUp,
         'tlmgr': TLMGR
     }
-    gs += [v() for k, v in cmds.items() if shutil.which(k)]
-    return gs
+    generators += [v() for k, v in cmds.items() if shutil.which(k)]
+    return generators
 
 
 if __name__ == '__main__':
@@ -71,12 +84,12 @@ if __name__ == '__main__':
     ss = [s for s in ss if f'--{s}' in args or s in args]
     if not ss or 'help' in args or '--help' in args or '-h' in args:
         print_help()
-        exit(0)
-    gs = list_generators()
+        sys.exit(0)
+    generators = list_generators()
     if 'bash' in ss:
-        BashGenerator(gs).generate_files()
+        BashGenerator(generators).generate_files()
     if 'fish' in ss:
-        FishGenerator(gs).generate_files()
+        FishGenerator(generators).generate_files()
     if 'zsh' in ss:
-        ZSHGenerator(gs).generate_files()
+        ZSHGenerator(generators).generate_files()
     print('Done. Existing files have been renamed with suffix .old')

@@ -35,7 +35,7 @@ class FishGenerator:
         self.generators = [Common(), *generators]
 
     def generate_files(self):
-        ls = self.generate_alises()
+        ls = self.generate_aliases()
         vs = self.generate_variables()
         fs = self.generate_functions()
         config = 'umask 077\n\n'
@@ -75,8 +75,8 @@ class FishGenerator:
                 for e in sorted(fs, key=lambda x: x.name)
                 if e.only is None or 'fish' in e.only]
 
-    def generate_alises(self):
-        fs = [g.generate_alises() for g in self.generators]
+    def generate_aliases(self):
+        fs = [g.generate_aliases() for g in self.generators]
         fs = list(itertools.chain.from_iterable(fs))
         return [(e.name, self.alias_to_string(e))
                 for e in sorted(fs, key=lambda x: x.name)

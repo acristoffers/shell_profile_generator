@@ -21,16 +21,19 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from .utils import Function, Variable
+from .utils import Function
 
 
-class Zypper:
+class PKG:
     def generate_functions(self):
         return [
             Function(
-                'update-zypper',
+                'update-pkg',
                 [],
-                'sudo zypper dup -y'
+                (
+                    'sudo pkg update\n'
+                    'sudo pkg upgrade -get dist-upgrade -y\n'
+                )
             )
         ]
 

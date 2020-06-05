@@ -21,7 +21,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from .utils import Function, Variable
+from .utils import Function
 
 
 class AUR:
@@ -37,5 +37,5 @@ class AUR:
     def generate_variables(self):
         return []
 
-    def generate_alises(self):
+    def generate_aliases(self):
         return []

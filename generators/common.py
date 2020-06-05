@@ -21,8 +21,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from .utils import *
 import locale
+
+from .utils import Alias, Function, Variable
 
 
 class Common:
@@ -127,7 +128,7 @@ class Common:
             Variable('PYTHON', '$(which python3)')
         ]
 
-    def generate_alises(self):
+    def generate_aliases(self):
         return [
             Alias('ccat', 'pygmentize -g')
         ]

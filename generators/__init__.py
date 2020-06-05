@@ -21,20 +21,26 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-from .apt import *
-from .aur import *
-from .bash import *
-from .brew import *
-from .dnf import *
-from .fish import *
-from .gem import *
-from .linux import *
-from .macos import *
-from .macport import *
-from .npm import *
-from .pacman import *
-from .rustup import *
-from .tlmgr import *
-from .yarn import *
-from .zsh import *
-from .zypper import *
+"""
+Generators module.
+Reexports everything.
+"""
+
+from .apt import APT
+from .aur import AUR
+from .bash import BashGenerator
+from .brew import Brew
+from .dnf import DNF
+from .fish import FishGenerator
+from .gem import GEM
+from .linux import Linux
+from .macos import macOS
+from .macport import MacPort
+from .npm import NPM
+from .pacman import Pacman
+from .pkg import PKG
+from .rustup import RustUp
+from .tlmgr import TLMGR
+from .yarn import Yarn
+from .zsh import ZSHGenerator
+from .zypper import Zypper

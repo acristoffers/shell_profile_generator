@@ -34,7 +34,7 @@ class ZSHGenerator:
         self.generators = [Common(), *generators]
 
     def generate_files(self):
-        ls = self.generate_alises()
+        ls = self.generate_aliases()
         vs = self.generate_variables()
         fs = self.generate_functions()
         profile = 'umask 077\n\n'
@@ -69,10 +69,10 @@ class ZSHGenerator:
                 for e in sorted(fs, key=lambda x: x.name)
                 if e.only is None or 'zsh' in e.only]
 
-    def generate_alises(self):
+    def generate_aliases(self):
         return [self.alias_to_string(e)
                 for g in self.generators
-                for e in g.generate_alises()
+                for e in g.generate_aliases()
                 if e.only is None or 'zsh' in e.only]
 
     def func_to_string(self, func):

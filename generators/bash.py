@@ -34,7 +34,7 @@ class BashGenerator:
         self.generators = [Common(), *generators]
 
     def generate_files(self):
-        ls = self.generate_alises()
+        ls = self.generate_aliases()
         vs = self.generate_variables()
         fs = self.generate_functions()
         profile = 'umask 077\n\n'
@@ -50,7 +50,7 @@ class BashGenerator:
         profile += 'add-to-path-if-exists $HOME/.local/bin\n'
         profile += 'add-to-path-if-exists $HOME/.config/yarn/global/node_modules/.bin\n'
         profile += 'add-to-path-if-exists $HOME/.cargo/bin\n'
-        print(f'Generating ~/.profile and ~/.bashrc')
+        print('Generating ~/.profile and ~/.bashrc')
         profile_file_name = path.expanduser('~/.profile')
         if path.exists(profile_file_name):
             shutil.move(profile_file_name, f'{profile_file_name}.old')
@@ -75,17 +75,17 @@ class BashGenerator:
                 for e in sorted(fs, key=lambda x: x.name)
                 if e.only is None or 'bash' in e.only]
 
-    def generate_alises(self):
+    def generate_aliases(self):
         return [self.alias_to_string(e)
                 for g in self.generators
-                for e in g.generate_alises()
+                for e in g.generate_aliases()
                 if e.only is None or 'bash' in e.only]
 
     def func_to_string(self, func):
         args = [a.replace('$', '') for a in func.args]
         args = [f'{arg}=${i+1}' for i, arg in enumerate(args)]
         f = f"function {func.name}() {{\n\t"
-        f += '\n\t'.join(args) + ('\n\t' if len(args) else '')
+        f += '\n\t'.join(args) + ('\n\t' if len(args) > 0 else '')
         f += func.body.replace('\n', '\n\t')
         f += '\n}'
         return f

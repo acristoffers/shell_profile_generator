@@ -24,16 +24,24 @@
 import os
 import shutil
 
-from .utils import *
+from .utils import Alias, Function, Variable
 
 
 class Linux:
     def generate_functions(self):
         gs = []
-        if shutil.which('pip2'):
+        if shutil.which('pip'):
             gs += [
                 Function(
                     'update-pip',
+                    [],
+                    'pip install --upgrade pip --user\n' +
+                    "pip list --outdated --no-cache-dir --user | awk 'FNR>2 {print $1}' | xargs pip install --no-cache-dir --upgrade --user")
+            ]
+        if shutil.which('pip2'):
+            gs += [
+                Function(
+                    'update-pip2',
                     [],
                     'pip2 install --upgrade pip --user\n' +
                     "pip2 list --outdated --no-cache-dir --user | awk 'FNR>2 {print $1}' | xargs pip2 install --no-cache-dir --upgrade --user")
@@ -53,7 +61,7 @@ class Linux:
             Variable('DISPLAY', f'"{os.environ["DISPLAY"]}"'),
         ]
 
-    def generate_alises(self):
+    def generate_aliases(self):
         return [
             Alias('ls', 'ls --color=auto', ['bash', 'zsh'])
         ]

@@ -40,5 +40,5 @@ class NPM:
     def generate_variables(self):
         return []
 
-    def generate_alises(self):
+    def generate_aliases(self):
         return []
