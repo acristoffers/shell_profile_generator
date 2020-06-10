@@ -32,7 +32,7 @@ class PKG:
                 [],
                 (
                     'sudo pkg update\n'
-                    'sudo pkg upgrade -get dist-upgrade -y\n'
+                    'sudo pkg upgrade -y\n'
                 )
             )
         ]
