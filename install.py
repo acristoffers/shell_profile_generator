@@ -31,7 +31,7 @@ import sys
 
 from generators import (APT, AUR, DNF, GEM, NPM, PKG, TLMGR, BashGenerator,
                         Brew, FishGenerator, Linux, MacPort, Pacman, RustUp,
-                        Yarn, ZSHGenerator, Zypper, macOS)
+                        Yarn, ZSHGenerator, Zypper, macOS, Yay)
 
 
 def print_help():
@@ -62,6 +62,7 @@ def list_generators():
             'zypper': Zypper,
             'dnf': DNF,
             'pacman': Pacman,
+            'yay': Yay,
             'aur': AUR,
             'pkg': PKG
         }

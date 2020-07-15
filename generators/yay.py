@@ -21,27 +21,21 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 
-"""
-Generators module.
-Reexports everything.
-"""
+from .utils import Function, Variable
 
-from .apt import APT
-from .aur import AUR
-from .bash import BashGenerator
-from .brew import Brew
-from .dnf import DNF
-from .fish import FishGenerator
-from .gem import GEM
-from .linux import Linux
-from .macos import macOS
-from .macport import MacPort
-from .npm import NPM
-from .pacman import Pacman
-from .pkg import PKG
-from .rustup import RustUp
-from .tlmgr import TLMGR
-from .yarn import Yarn
-from .zsh import ZSHGenerator
-from .zypper import Zypper
-from .yay import Yay
+
+class Yay:
+    def generate_functions(self):
+        return [
+            Function(
+                'update-yay',
+                [],
+                'yay -Syu'
+            )
+        ]
+
+    def generate_variables(self):
+        return []
+
+    def generate_aliases(self):
+        return []
