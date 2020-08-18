@@ -36,7 +36,8 @@ class Linux:
                     'update-pip',
                     [],
                     'pip install --upgrade pip --user\n' +
-                    "pip list --outdated --no-cache-dir --user | awk 'FNR>2 {print $1}' | xargs pip install --no-cache-dir --upgrade --user")
+                    "pip list --outdated --no-cache-dir --user | awk 'FNR>2 {print $1}' | xargs pip install --no-cache-dir --upgrade --user" +
+                    "pip check | awk '!/^No$/ {print $1}' | xargs pip install -U")
             ]
         if shutil.which('pip2'):
             gs += [
@@ -44,7 +45,8 @@ class Linux:
                     'update-pip2',
                     [],
                     'pip2 install --upgrade pip --user\n' +
-                    "pip2 list --outdated --no-cache-dir --user | awk 'FNR>2 {print $1}' | xargs pip2 install --no-cache-dir --upgrade --user")
+                    "pip2 list --outdated --no-cache-dir --user | awk 'FNR>2 {print $1}' | xargs pip2 install --no-cache-dir --upgrade --user" +
+                    "pip2 check | awk '!/^No$/ {print $1}' | xargs pip2 install -U")
             ]
         if shutil.which('pip3'):
             gs += [
@@ -52,7 +54,8 @@ class Linux:
                     'update-pip3',
                     [],
                     'pip3 install --upgrade pip --user\n' +
-                    "pip3 list --outdated --no-cache-dir --user | awk 'FNR>2 {print $1}' | xargs pip3 install --no-cache-dir --upgrade --user")
+                    "pip3 list --outdated --no-cache-dir --user | awk 'FNR>2 {print $1}' | xargs pip3 install --no-cache-dir --upgrade --user" +
+                    "pip3 check | awk '!/^No$/ {print $1}' | xargs pip3 install -U")
             ]
         return gs
 

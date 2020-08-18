@@ -35,7 +35,8 @@ class macOS:
                     'update-pip',
                     [],
                     'pip install --upgrade pip\n' +
-                    "pip list --outdated --no-cache-dir | awk 'FNR>2 {print $1}' | xargs pip install --no-cache-dir --upgrade")
+                    "pip list --outdated --no-cache-dir | awk 'FNR>2 {print $1}' | xargs pip install --no-cache-dir --upgrade" +
+                    "pip check | awk '!/^No$/ {print $1}' | xargs pip install -U")
             ]
         if shutil.which('pip2'):
             gs += [
@@ -43,7 +44,8 @@ class macOS:
                     'update-pip2',
                     [],
                     'pip2 install --upgrade pip\n' +
-                    "pip2 list --outdated --no-cache-dir | awk 'FNR>2 {print $1}' | xargs pip2 install --no-cache-dir --upgrade")
+                    "pip2 list --outdated --no-cache-dir | awk 'FNR>2 {print $1}' | xargs pip2 install --no-cache-dir --upgrade" +
+                    "pip2 check | awk '!/^No$/ {print $1}' | xargs pip2 install -U")
             ]
         if shutil.which('pip3'):
             gs += [
@@ -51,7 +53,8 @@ class macOS:
                     'update-pip3',
                     [],
                     'pip3 install --upgrade pip\n' +
-                    "pip3 list --outdated --no-cache-dir | awk 'FNR>2 {print $1}' | xargs pip3 install --no-cache-dir --upgrade")
+                    "pip3 list --outdated --no-cache-dir | awk 'FNR>2 {print $1}' | xargs pip3 install --no-cache-dir --upgrade" +
+                    "pip3 check | awk '!/^No$/ {print $1}' | xargs pip3 install -U")
             ]
         return gs
 
