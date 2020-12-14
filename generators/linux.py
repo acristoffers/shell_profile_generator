@@ -62,6 +62,7 @@ class Linux:
     def generate_variables(self):
         return [
             Variable('DISPLAY', f'"{os.environ["DISPLAY"]}"'),
+            Variable('QT_QPA_PLATFORMTHEME', 'gtk2'),
         ]
 
     def generate_aliases(self):
