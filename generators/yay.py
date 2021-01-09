@@ -30,7 +30,8 @@ class Yay:
             Function(
                 'update-yay',
                 [],
-                'yay -Syu'
+                'yay -Syu\n' +
+                'yay -Sc'
             )
         ]
 
